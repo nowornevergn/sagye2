@@ -3,417 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>김아진</title>
+    <title>나만의 N행시 짓기</title>
     <style>
-        /* Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-            letter-spacing: -0.02em;
-        }
+        /* 깔끔하고 심플한 디자인 (CSS) */
         body {
-            background-color: #f8fafc;
-            color: #334155;
-            line-height: 1.7;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f7f9fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Layout Container */
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-            color: #ffffff;
-            padding: 100px 0 120px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-badge {
-            background-color: #0ea5e9;
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-        }
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            line-height: 1.25;
-            margin-bottom: 24px;
-            word-break: keep-all;
-        }
-        .hero p {
-            font-size: 20px;
-            color: #94a3b8;
-            margin-bottom: 40px;
-            font-weight: 400;
-            word-break: keep-all;
-        }
-        .btn-primary {
-            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-            color: white;
-            font-size: 18px;
-            font-weight: 700;
-            padding: 16px 40px;
-            border-radius: 30px;
-            display: inline-block;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
-        }
-
-        /* Section Commons */
-        section {
-            padding: 80px 0;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 16px;
-        }
-        .section-subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #64748b;
-            margin-bottom: 50px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            word-break: keep-all;
-        }
-
-        /* Why Vibe Coding Section */
-        .why-section {
             background-color: #ffffff;
-        }
-        .why-content {
-            background-color: #f1f5f9;
             padding: 40px;
-            border-radius: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
         }
-        .why-content p {
-            font-size: 18px;
-            color: #475569;
-            margin-bottom: 20px;
+        
+        /* 새로 추가된 버튼 그룹 스타일 */
+        .topic-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
-        .why-content p.highlight {
-            font-weight: 700;
-            color: #1e3a8a;
-            font-size: 22px;
-            margin-bottom: 0;
+        .topic-btn {
+            flex: 1;
+            padding: 12px 8px;
+            background-color: #f8fafc;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 75px;
+        }
+        .topic-btn:hover {
+            background-color: #e2e8f0;
+        }
+        /* 선택된 버튼 스타일 */
+        .topic-btn.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
         }
 
-        /* Target Section */
-        .target-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+        #input-container {
+            margin-bottom: 24px;
         }
-        .target-card {
-            background-color: #ffffff;
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
-        }
-        .target-card h3 {
-            font-size: 20px;
-            color: #0f172a;
-            margin-bottom: 12px;
+        .input-group {
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-        .target-card p {
-            color: #475569;
-            font-size: 16px;
-        }
-
-        /* Curriculum Section */
-        .curriculum-section {
-            background-color: #ffffff;
-        }
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .timeline-item {
-            padding: 20px 30px;
-            position: relative;
-            background-color: #f8fafc;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border-left: 4px solid #0ea5e9;
-        }
-        .timeline-day {
-            font-size: 14px;
-            font-weight: 700;
-            color: #0ea5e9;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-        .timeline-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0f172a;
             margin-bottom: 12px;
         }
-        .timeline-details {
-            list-style: none;
+        .input-group:last-child {
+            margin-bottom: 0;
         }
-        .timeline-details li {
-            position: relative;
-            padding-left: 16px;
-            margin-bottom: 6px;
-            color: #475569;
-        }
-        .timeline-details li::before {
-            content: "•";
-            color: #0ea5e9;
+        .input-group label {
+            font-size: 18px;
             font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Basecamp Section */
-        .basecamp-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            margin-top: 30px;
-        }
-        .basecamp-feature {
+            color: #3b82f6;
+            width: 40px;
             text-align: center;
-            padding: 24px;
         }
-        .basecamp-feature h4 {
-            font-size: 18px;
-            color: #0f172a;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .basecamp-feature p {
-            font-size: 15px;
-            color: #64748b;
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            background-color: #ffffff;
-        }
-        .faq-wrapper {
-            max-width: 750px;
-            margin: 0 auto;
-        }
-        .faq-item {
-            margin-bottom: 24px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 20px;
-        }
-        .faq-q {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 8px;
-            display: flex;
-            gap: 8px;
-        }
-        .faq-q span {
-            color: #10b981;
-        }
-        .faq-a {
+        .input-group input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
             font-size: 16px;
-            color: #475569;
-            padding-left: 24px;
+            outline: none;
+            transition: border-color 0.2s;
         }
-
-        /* CTA Section Footer */
-        .cta-footer {
-            background-color: #0f172a;
-            color: #ffffff;
-            text-align: center;
-            padding: 80px 0;
+        .input-group input:focus {
+            border-color: #3b82f6;
         }
-        .cta-footer h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        .cta-footer p {
-            color: #94a3b8;
-            margin-bottom: 32px;
+        
+        #submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #10b981; /* 완성 버튼은 구분을 위해 초록색 계열로 변경 */
+            color: white;
+            border: none;
+            border-radius: 8px;
             font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
-
-        /* Responsive Settings */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .hero p { font-size: 16px; }
-            .section-title { font-size: 26px; }
-            .why-content p { font-size: 16px; }
-            .why-content p.highlight { font-size: 18px; }
+        #submit-btn:hover {
+            background-color: #059669;
+        }
+        
+        #result-container {
+            margin-top: 24px;
+            padding: 20px;
+            background-color: #f0f9ff;
+            border-radius: 8px;
+            border: 1px solid #bae6fd;
+            display: none;
+        }
+        .result-line {
+            margin: 8px 0;
+            font-size: 17px;
+            color: #334155;
+            line-height: 1.5;
+        }
+        .result-line strong {
+            color: #0369a1;
+            font-size: 19px;
+            margin-right: 8px;
         }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <div class="container">
-            <span class="hero-badge">VIBE CODING CAMP</span>
-            <h1>3박 4일의 압도적 몰입,<br>바이브코딩 캠프</h1>
-            <p>"코딩 한 줄 몰라도 괜찮습니다. AI와 대화하며 당신의 서비스를 직접 구현하세요."<br>파도 소리가 들리는 강릉의 여유로운 공간에서, 오직 내 아이디어에만 집중하는 시간.</p>
-            <a href="#" class="btn-primary">지금 바로 탑승하기 (사전예약)</a>
-        </div>
-    </header>
+<div class="container">
+    <h1>📝 N행시 짓기</h1>
+    
+    <div class="topic-buttons">
+        <button class="topic-btn" onclick="selectTopic('제주도', this)">제주도</button>
+        <button class="topic-btn" onclick="selectTopic('산방산', this)">산방산</button>
+        <button class="topic-btn" onclick="selectTopic('위니브', this)">위니브</button>
+        <button class="topic-btn" onclick="selectTopic('오피스제주', this)">오피스제주</button>
+    </div>
 
-    <section class="why-section">
-        <div class="container">
-            <h2 class="section-title">WHY VIBE CODING?</h2>
-            <p class="section-subtitle">머릿속에 맴도는 아이디어, 언제까지 기획서에만 머물러 있을 건가요?<br>이제는 외주 개발자를 찾거나 복잡한 코딩 문법을 공부할 필요가 없습니다.</p>
-            <div class="why-content">
-                <p>자연어로 AI와 소통하며 필요한 기능을 뚝딱 만들어내는 '바이브코딩'</p>
-                <p class="highlight">오직 당신의 '바이브'와 AI만 있으면 충분합니다.</p>
-            </div>
+    <div id="input-container">
         </div>
-    </section>
 
-    <section>
-        <div class="container">
-            <h2 class="section-title">이런 분들께 완벽합니다</h2>
-            <p class="section-subtitle">기술적인 장벽 때문에 시작하지 못했던 아이디어를 현실로 만듭니다.</p>
-            <div class="target-cards">
-                <div class="target-card">
-                    <h3>👤 비개발자 1인 비즈니스 대표</h3>
-                    <p>n8n, 파이썬 등을 활용하여 번거로웠던 고객 관리 및 마케팅 업무를 내 손으로 직접 자동화하고 싶으신 분</p>
-                </div>
-                <div class="target-card">
-                    <h3>✨ 실행력 넘치는 크리에이터</h3>
-                    <p>내 브랜드 고유의 색깔이나 키치하고 톡톡 튀는 감성을 담아낸 맞춤형 웹 페이지나 전용 툴이 필요하신 분</p>
-                </div>
-                <div class="target-card">
-                    <h3>💡 기획자 및 마케터</h3>
-                    <p>매번 개발 팀의 일정 조율만 기다리다 지쳐, "답답해서 내가 직접 빠르게 프로토타입을 만들겠다!" 하시는 분</p>
-                </div>
-            </div>
+    <button onclick="showResult()" id="submit-btn" style="display: none;">완성하기</button>
+
+    <div id="result-container">
         </div>
-    </section>
+</div>
 
-    <section class="curriculum-section">
-        <div class="container">
-            <h2 class="section-title">3박 4일 몰입 커리큘럼</h2>
-            <p class="section-subtitle">기획부터 배포, 그리고 자동화 연결까지 단계별로 완벽하게 짜인 빌드업 코스</p>
+<script>
+    // 주제별 글자 데이터
+    const wordData = {
+        "제주도": ["제", "주", "도"],
+        "산방산": ["산", "방", "산"],
+        "위니브": ["위", "니", "브"],
+        "오피스제주": ["오", "피", "스", "제", "주"]
+    };
+
+    let currentSelectedWord = "";
+
+    // 버튼 클릭 시 실행되는 함수
+    function selectTopic(word, buttonElement) {
+        currentSelectedWord = word;
+
+        // 1. 모든 버튼에서 'active' 클래스 제거 (기본 스타일로 되돌림)
+        const buttons = document.querySelectorAll('.topic-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // 2. 클릭한 버튼에만 'active' 클래스 추가 (선택된 스타일 적용)
+        buttonElement.classList.add('active');
+
+        // 3. 입력창 렌더링
+        renderInputs();
+    }
+
+    // 선택한 단어에 맞게 입력창(Input)을 생성하는 함수
+    function renderInputs() {
+        const inputContainer = document.getElementById("input-container");
+        const submitBtn = document.getElementById("submit-btn");
+        const resultContainer = document.getElementById("result-container");
+
+        // 초기화
+        inputContainer.innerHTML = "";
+        resultContainer.style.display = "none";
+        
+        if (currentSelectedWord) {
+            submitBtn.style.display = "block";
+            const chars = wordData[currentSelectedWord];
             
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-day">DAY 1</div>
-                    <div class="timeline-title">셋업 & 아이데이션 (Vibe Check)</div>
-                    <ul class="timeline-details">
-                        <li><strong>오후:</strong> 오리엔테이션 및 가벼운 아이스브레이킹</li>
-                        <li><strong>저녁:</strong> 아이디어 구체화 및 AI 개발 환경 셋팅 (Cursor, ChatGPT 등 완벽 적응)</li>
-                        <li><strong>밤:</strong> 바다를 보며 즐기는 웰컴 네트워킹 & 영감 나누기</li>
-                    </ul>
-                </div>
+            chars.forEach((char, index) => {
+                const group = document.createElement("div");
+                group.className = "input-group";
+                
+                group.innerHTML = `
+                    <label>${char}</label>
+                    <input type="text" id="input-${index}" placeholder="내용을 입력하세요" autocomplete="off">
+                `;
+                inputContainer.appendChild(group);
+            });
+        }
+    }
 
-                <div class="timeline-item">
-                    <div class="timeline-day">DAY 2</div>
-                    <div class="timeline-title">폭풍 바이브 코딩 (Build & Flow)</div>
-                    <ul class="timeline-details">
-                        <li><strong>오전:</strong> AI와의 티키타카를 위한 핵심 프롬프트 엔지니어링 뼈대 잡기</li>
-                        <li><strong>오후:</strong> UI/UX 화면 구성 및 핵심 기능 구현 (버그가 발생해도 AI가 실시간 해결!)</li>
-                        <li><strong>저녁:</strong> 온전한 내 서비스 구현을 위한 개별 집중 코딩 타임 & 멘토링 인터랙션</li>
-                    </ul>
-                </div>
+    // 입력한 내용을 바탕으로 결과를 화면에 보여주는 함수
+    function showResult() {
+        if (!currentSelectedWord) return;
 
-                <div class="timeline-item">
-                    <div class="timeline-day">DAY 3</div>
-                    <div class="timeline-title">디테일 깎기 & 자동화 연결 (Connect & Refine)</div>
-                    <ul class="timeline-details">
-                        <li><strong>오전:</strong> 데이터베이스 연동 및 n8n 등을 활용한 고도화된 워크플로우 자동화</li>
-                        <li><strong>오후:</strong> 디자인 디테일 다듬기 (B급 감성, 키치함 등 내 비즈니스 무드 반영)</li>
-                        <li><strong>저녁:</strong> 실제 환경에서의 릴리즈 전 최종 통합 테스트 및 디버깅</li>
-                    </ul>
-                </div>
+        const chars = wordData[currentSelectedWord];
+        const resultContainer = document.getElementById("result-container");
+        
+        resultContainer.innerHTML = ""; // 기존 결과 초기화
+        
+        let isAllFilled = true;
 
-                <div class="timeline-item">
-                    <div class="timeline-day">DAY 4</div>
-                    <div class="timeline-title">런칭 & 데모데이 (Launch & Party)</div>
-                    <ul class="timeline-details">
-                        <li><strong>오전:</strong> 내가 직접 만든 결과물 서비스 시연 및 유저 피드백 (미니 데모데이)</li>
-                        <li><strong>오후:</strong> 3박 4일간의 여정 회고, 수료식 및 일상 비즈니스로의 확장 계획 수립</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+        chars.forEach((char, index) => {
+            const inputVal = document.getElementById(`input-${index}`).value.trim();
+            
+            if (inputVal === "") {
+                isAllFilled = false;
+            }
 
-    <section>
-        <div class="container">
-            <h2 class="section-title">베이프캠프 안내</h2>
-            <p class="section-subtitle">오롯이 영감과 성장에만 집중할 수 있는 최고의 환경을 제공합니다.</p>
-            <div class="basecamp-grid">
-                <div class="basecamp-feature">
-                    <h4>📍 영감의 공간</h4>
-                    <p>강릉 워케이션 센터 / 독채 라이프 스타일 스테이</p>
-                </div>
-                <div class="basecamp-feature">
-                    <h4>💻 몰입의 라운지</h4>
-                    <p>24시간 개방형 코딩 공간, 초고속 와이파이, 무제한 스낵바 지원</p>
-                </div>
-                <div class="basecamp-feature">
-                    <h4>🛌 완벽한 휴식</h4>
-                    <p>스트레스 없는 온전한 리프레시를 위한 1인 1실 숙박 보장</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            const p = document.createElement("p");
+            p.className = "result-line";
+            p.innerHTML = `<strong>${char}</strong> ${inputVal}`;
+            resultContainer.appendChild(p);
+        });
 
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title">자주 묻는 질문 (FAQ)</h2>
-            <div class="faq-wrapper">
-                <div class="faq-item">
-                    <div class="faq-q"><span>Q.</span> 코딩을 정말 한 번도 해본 적 없는데 참여 가능한가요?</div>
-                    <div class="faq-a">네, 당연히 가능합니다! 컴퓨터 타자만 치실 줄 안다면 필요한 코드는 AI가 전부 작성해 줍니다. 이번 캠프에서 가장 중요한 것은 문법이 아니라 '무엇을 만들고 자동화하고 싶은지'에 대한 비즈니스 기획력입니다.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q"><span>Q.</span> 캠프 참여 시 개인 준비물이 따로 있나요?</div>
-                    <div class="faq-a">개인 노트북(충전기 포함)과 3박 4일 동안 내 서비스를 반드시 끝장내겠다는 뜨거운 열정만 챙겨오시면 됩니다.</div>
-                </div>
-            </div>
-        </div>
-    </section>
+        if (!isAllFilled) {
+            alert("모든 칸을 입력해주세요!");
+            return;
+        }
 
-    <footer class="cta-footer">
-        <div class="container">
-            <h2>세상에 없던 나만의 서비스를 런칭할 준비가 되셨나요?</h2>
-            <p>선착순 소수 정예 모집 진행 중, 얼리버드 특별 혜택을 놓치지 마세요.</p>
-            <a href="#" class="btn-primary">캠프 합류하기 (결제 페이지로 이동)</a>
-        </div>
-    </footer>
+        resultContainer.style.display = "block";
+    }
+</script>
 
 </body>
 </html>
